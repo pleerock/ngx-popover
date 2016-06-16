@@ -1,0 +1,45 @@
+<html>
+<head>
+    <meta>
+    <meta charset="UTF-8"/>
+    <title>ng2-popover</title>
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
+
+    <script src="../../node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="../../node_modules/zone.js/dist/zone.js"></script>
+    <script src="../../node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="../../node_modules/systemjs/dist/system.src.js"></script>
+
+    <script>
+        System.config({
+            baseURL: "/ng2-popover/", // replace with your baseURL here
+            defaultJSExtensions: true,
+            map: {
+                "@angular": "node_modules/@angular",
+                "rxjs": "node_modules/rxjs"
+            },
+            packages: {
+                "app": { main: "main", defaultExtension: "ts" },
+                "rxjs": { defaultExtension: "js" },
+                "@angular/common": { main: "index.js", defaultExtension: "js" },
+                "@angular/compiler": { main: "index.js", defaultExtension: "js" },
+                "@angular/core": { main: "index.js", defaultExtension: "js" },
+                "@angular/http": { main: "index.js", defaultExtension: "js" },
+                "@angular/platform-browser": { main: "index.js", defaultExtension: "js" },
+                "@angular/platform-browser-dynamic": { main: "index.js", defaultExtension: "js" },
+                "@angular/router": { main: "index.js", defaultExtension: "js" },
+                "@angular/router-deprecated": { main: "index.js", defaultExtension: "js" },
+                "@angular/testing": { main: "index.js", defaultExtension: "js" },
+                "@angular/upgrade": { main: "index.js", defaultExtension: "js" }
+            }
+        });
+    </script>
+    <script>System.import("../../build/es5/sample/sample1-simple-usage/main").catch(function(err){ console.error(err); });</script>
+
+</head>
+<base href="#/">
+<body>
+<div style="margin-top: 200px"></div>
+<app>Loading...</app>
+</body>
+</html>
