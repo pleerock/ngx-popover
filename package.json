@@ -2,7 +2,7 @@
   "name": "ng2-popover",
   "version": "0.0.1",
   "description": "Simple popover control for your angular2 applications using bootstrap3.",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "readmeFilename": "README.md",
   "private": true,
   "author": {
