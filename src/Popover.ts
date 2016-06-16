@@ -83,19 +83,19 @@ export class Popover {
                 this.popover.instance.onCloseFromOutside.subscribe(() => this.hide());
             });
         } else {
-            const tooltip = this.content as PopoverContent;
-            tooltip.hostElement = this.viewContainerRef.element.nativeElement;
+            const popover = this.content as PopoverContent;
+            popover.hostElement = this.viewContainerRef.element.nativeElement;
             if (this.popoverPlacement !== undefined)
-                tooltip.placement = this.popoverPlacement;
+                popover.placement = this.popoverPlacement;
             if (this.popoverAnimation !== undefined)
-                tooltip.animation = this.popoverAnimation;
+                popover.animation = this.popoverAnimation;
             if (this.popoverTitle !== undefined)
-                tooltip.title = this.popoverTitle;
+                popover.title = this.popoverTitle;
             if (this.popoverCloseOnClickOutside !== undefined)
-                tooltip.closeOnClickOutside = this.popoverCloseOnClickOutside;
+                popover.closeOnClickOutside = this.popoverCloseOnClickOutside;
 
-            tooltip.onCloseFromOutside.subscribe(() => this.hide());
-            tooltip.show();
+            popover.onCloseFromOutside.subscribe(() => this.hide());
+            popover.show();
         }
     }
 

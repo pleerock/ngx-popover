@@ -9,7 +9,7 @@ import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef, OnDestro
      [class.in]="isIn"
      [class.fade]="animation"
      style="display: block"
-     role="tooltip">
+     role="popover">
     <div class="arrow"></div> 
     <h3 class="popover-title" [hidden]="!title">{{ title }}</h3>
     <div class="popover-content">
