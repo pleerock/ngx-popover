@@ -1,6 +1,6 @@
 {
   "name": "ng2-popover",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Simple popover control for your angular2 applications using bootstrap3.",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -22,10 +22,11 @@
     "typescript",
     "angular2-popover"
   ],
-  "dependencies": {
-    "@angular/core": "^2.0.0-rc.2"
+  "peerDependencies": {
+    "@angular/core": "^2.0.0-rc.1"
   },
   "devDependencies": {
+    "@angular/core": "^2.0.0-rc.2",
     "@angular/common": "^2.0.0-rc.2",
     "@angular/compiler": "^2.0.0-rc.2",
     "@angular/platform-browser": "^2.0.0-rc.2",
