@@ -3,22 +3,20 @@ import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef, OnDestro
 @Component({
     selector: "popover-content",
     template: `
-<div>
-    <div #popoverDiv class="popover {{ placement }}"
-         [style.top]="top + 'px'"
-         [style.left]="left + 'px'"
-         [class.in]="isIn"
-         [class.fade]="animation"
-         style="display: block"
-         role="popover">
-        <div [hidden]="!closeOnMouseOutside" class="virtual-area"></div>
-        <div class="arrow"></div> 
-        <h3 class="popover-title" [hidden]="!title">{{ title }}</h3>
-        <div class="popover-content">
-            <ng-content></ng-content>
-            {{ content }}
-        </div> 
-    </div>
+<div #popoverDiv class="popover {{ placement }}"
+     [style.top]="top + 'px'"
+     [style.left]="left + 'px'"
+     [class.in]="isIn"
+     [class.fade]="animation"
+     style="display: block"
+     role="popover">
+    <div [hidden]="!closeOnMouseOutside" class="virtual-area"></div>
+    <div class="arrow"></div> 
+    <h3 class="popover-title" [hidden]="!title">{{ title }}</h3>
+    <div class="popover-content">
+        <ng-content></ng-content>
+        {{ content }}
+    </div> 
 </div>
 `,
     styles: [`
