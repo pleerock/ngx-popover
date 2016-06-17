@@ -40,22 +40,49 @@ export class Popover {
     popoverTitle: string;
 
     @Input()
+    popoverOnHover: boolean = false;
+
+    @Input()
     popoverCloseOnClickOutside: boolean = false;
+
+    @Input()
+    popoverCloseOnMouseOutside: boolean = false;
 
     // -------------------------------------------------------------------------
     // Public Methods
     // -------------------------------------------------------------------------
 
     @HostListener("click")
-    showOrHide(): void {
-        if (this.popoverDisabled)
-            return;
+    showOrHideOnClick(): void {
+        if (this.popoverOnHover) return;
+        if (this.popoverDisabled) return;
 
         if (!this.visible) {
             this.show();
         } else {
             this.hide();
         }
+    }
+
+    @HostListener("focusin")
+    @HostListener("mouseenter")
+    showOnHover(): void {
+        if (!this.popoverOnHover) return;
+        if (this.popoverDisabled) return;
+        if (this.visible) return;
+        
+        this.show();
+    }
+
+    @HostListener("focusout")
+    @HostListener("mouseleave")
+    hideOnHover(): void {
+        if (this.popoverCloseOnMouseOutside) return; // don't do anything since not we control this
+        if (!this.popoverOnHover) return;
+        if (this.popoverDisabled) return;
+        if (!this.visible) return;
+
+        this.hide();
     }
 
     // -------------------------------------------------------------------------
@@ -70,17 +97,21 @@ export class Popover {
                     return;
 
                 this.popover = this.viewContainerRef.createComponent(factory);
-                this.popover.instance.hostElement = this.viewContainerRef.element.nativeElement;
-                this.popover.instance.content = this.content as string;
+                const popover = this.popover.instance as PopoverContent;
+                popover.hostElement = this.viewContainerRef.element.nativeElement;
+                popover.content = this.content as string;
                 if (this.popoverPlacement !== undefined)
-                    this.popover.instance.placement = this.popoverPlacement;
+                    popover.placement = this.popoverPlacement;
                 if (this.popoverAnimation !== undefined)
-                    this.popover.instance.animation = this.popoverAnimation;
+                    popover.animation = this.popoverAnimation;
                 if (this.popoverTitle !== undefined)
-                    this.popover.instance.title = this.popoverTitle;
+                    popover.title = this.popoverTitle;
                 if (this.popoverCloseOnClickOutside !== undefined)
-                    this.popover.instance.closeOnClickOutside = this.popoverCloseOnClickOutside;
-                this.popover.instance.onCloseFromOutside.subscribe(() => this.hide());
+                    popover.closeOnClickOutside = this.popoverCloseOnClickOutside;
+                if (this.popoverCloseOnMouseOutside !== undefined)
+                    popover.closeOnMouseOutside = this.popoverCloseOnMouseOutside;
+                
+                popover.onCloseFromOutside.subscribe(() => this.hide());
             });
         } else {
             const popover = this.content as PopoverContent;
@@ -93,6 +124,8 @@ export class Popover {
                 popover.title = this.popoverTitle;
             if (this.popoverCloseOnClickOutside !== undefined)
                 popover.closeOnClickOutside = this.popoverCloseOnClickOutside;
+            if (this.popoverCloseOnMouseOutside !== undefined)
+                popover.closeOnMouseOutside = this.popoverCloseOnMouseOutside;
 
             popover.onCloseFromOutside.subscribe(() => this.hide());
             popover.show();

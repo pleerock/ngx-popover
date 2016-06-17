@@ -33,6 +33,23 @@ import {POPOVER_DIRECTIVES} from "../../src/index";
         
         <button [popover]="myPopover">click this button to see a popover</button>
     </div>
+
+    <!-- popover show on hover -->
+    <br/>
+    <div>
+        <button popover="Hello popover" [popoverOnHover]="true">hover this button to see a popover</button>
+    </div>
+
+    <!-- popover show on hover and hide only when mouse over outside of the popover -->
+    <br/>
+    <div>
+        <button popover="Hello popover"
+                popoverPlacement="right"
+                [popoverOnHover]="true" 
+                [popoverCloseOnMouseOutside]="true">
+            hover this button to see a popover, allows to create interactive popovers
+        </button>
+    </div>
     
 </div>
 `,

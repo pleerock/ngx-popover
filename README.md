@@ -33,7 +33,9 @@ Example of simple usage:
 <div popover="content to be shown in the popover"
      popoverTitle="Popover header"
      popoverPlacement="top"
+     [popoverOnHover]="false"
      [popoverCloseOnClickOutside]="true"
+     [popoverCloseOnMouseOutside]="false"
      [popoverDisabled]="false"
      [popoverAnimation]="true">
     element on which this popover is applied.
@@ -59,12 +61,15 @@ Example of usage with dynamic html content:
     * `popover="string"` The message to be shown in the popover.
     * `popoverTitle="string"` Popover title text.
     * `popoverPlacement="top|bottom|left|right"` Indicates where the popover should be placed. Default is **"bottom"**.
-    * `[popoverCloseOnClickOutside]="true|false"` Indicates if popover should be closed when you click outside of it. Default is **false**.
     * `[popoverDisabled]="true|false"` Indicates if popover should be disabled. If popover is disabled then it will not be shown. Default is **false**
     * `[popoverAnimation]="true|false"` Indicates if all popover should be shown with animation or not. Default is **true**.
+    * `[popoverOnHover]="true|false"` If set to true then popover will open on mouse over instead of mouse click. Default is **false**.
+    * `[popoverCloseOnMouseOutside]="true|false"` Indicates if popover should be closed when user mouse outside of it. Default is **false**.
+    * `[popoverCloseOnClickOutside]="true|false"` Indicates if popover should be closed when user click outside of it. Default is **false**.
 * `<popover-content>`:
     * `placement="top|bottom|left|right"` Indicates where the popover should be placed. Default is **"bottom"**.
     * `[animation]="true|false"` Indicates if all popover should be shown with animation or not. Default is **true**.
+    * `[closeOnMouseOutside]="true|false"` Indicates if popover should be closed when user mouse outside of it. Default is **false**.
     * `[closeOnClickOutside]="true|false"` Indicates if popover should be closed when you click outside of it. Default is **false**.
 
 ## Sample
@@ -103,6 +108,23 @@ import {POPOVER_DIRECTIVES} from "ng2-popover";
         </popover-content>
 
         <button [popover]="myPopover">click this button to see a popover</button>
+    </div>
+
+    <!-- popover show on hover -->
+    <br/>
+    <div>
+        <button popover="Hello popover" [popoverOnHover]="true">hover this button to see a popover</button>
+    </div>
+
+    <!-- popover show on hover and hide only when mouse over outside of the popover -->
+    <br/>
+    <div>
+        <button popover="Hello popover"
+                popoverPlacement="right"
+                [popoverOnHover]="true"
+                [popoverCloseOnMouseOutside]="true">
+            hover this button to see a popover, allows to create interactive popovers
+        </button>
     </div>
 
 </div>

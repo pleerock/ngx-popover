@@ -3,21 +3,43 @@ import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef, OnDestro
 @Component({
     selector: "popover-content",
     template: `
-<div #popoverDiv class="popover {{ placement }}"
-     [style.top]="top + 'px'"
-     [style.left]="left + 'px'"
-     [class.in]="isIn"
-     [class.fade]="animation"
-     style="display: block"
-     role="popover">
-    <div class="arrow"></div> 
-    <h3 class="popover-title" [hidden]="!title">{{ title }}</h3>
-    <div class="popover-content">
-        <ng-content></ng-content>
-        {{ content }}
-    </div> 
+<div>
+    <div #popoverDiv class="popover {{ placement }}"
+         [style.top]="top + 'px'"
+         [style.left]="left + 'px'"
+         [class.in]="isIn"
+         [class.fade]="animation"
+         style="display: block"
+         role="popover">
+        <div [hidden]="!closeOnMouseOutside" class="virtual-area"></div>
+        <div class="arrow"></div> 
+        <h3 class="popover-title" [hidden]="!title">{{ title }}</h3>
+        <div class="popover-content">
+            <ng-content></ng-content>
+            {{ content }}
+        </div> 
+    </div>
 </div>
-`
+`,
+    styles: [`
+.popover .virtual-area {
+    height: 11px;
+    width: 100%;
+    position: absolute;
+}
+.popover.top .virtual-area {
+    bottom: -11px; 
+}
+.popover.bottom .virtual-area {
+    top: -11px; 
+}
+.popover.left .virtual-area {
+    right: -11px; 
+}
+.popover.right .virtual-area {
+    left: -11px; 
+}
+`]
 })
 export class PopoverContent implements AfterViewInit, OnDestroy {
 
@@ -42,6 +64,9 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
 
     @Input()
     closeOnClickOutside: boolean = false;
+
+    @Input()
+    closeOnMouseOutside: boolean = false;
 
     // -------------------------------------------------------------------------
     // Properties
@@ -86,6 +111,8 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         if (this.closeOnClickOutside)
             document.addEventListener("mousedown", this.onDocumentMouseDown);
+        if (this.closeOnMouseOutside)
+            document.addEventListener("mouseover", this.onDocumentMouseDown);
 
         this.show();
         this.cdr.detectChanges();
@@ -94,6 +121,8 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     ngOnDestroy() {
         if (this.closeOnClickOutside)
             document.removeEventListener("mousedown", this.onDocumentMouseDown);
+        if (this.closeOnMouseOutside)
+            document.removeEventListener("mouseover", this.onDocumentMouseDown);
     }
 
     // -------------------------------------------------------------------------
@@ -104,7 +133,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
         if (!this.hostElement)
             return;
 
-        const p = this.positionElements(this.hostElement, this.element.nativeElement.children[0], this.placement);
+        const p = this.positionElements(this.hostElement, this.popoverDiv.nativeElement, this.placement);
         this.displayType = "block";
         this.top = p.top;
         this.left = p.left;
