@@ -37,7 +37,8 @@ Example of simple usage:
      [popoverCloseOnClickOutside]="true"
      [popoverCloseOnMouseOutside]="false"
      [popoverDisabled]="false"
-     [popoverAnimation]="true">
+     [popoverAnimation]="true"
+     [popoverDismissTimeout]="1000">
     element on which this popover is applied.
 </div>
 ```
@@ -66,6 +67,7 @@ Example of usage with dynamic html content:
     * `[popoverOnHover]="true|false"` If set to true then popover will open on mouse over instead of mouse click. Default is **false**.
     * `[popoverCloseOnMouseOutside]="true|false"` Indicates if popover should be closed when user mouse outside of it. Default is **false**.
     * `[popoverCloseOnClickOutside]="true|false"` Indicates if popover should be closed when user click outside of it. Default is **false**.
+    * `[popoverDismissTimeout]="number"` Used to automatically dismiss popover after given amount of time. Default is **0**, means disabled.
 * `<popover-content>`:
     * `placement="top|bottom|left|right"` Indicates where the popover should be placed. Default is **"bottom"**.
     * `[animation]="true|false"` Indicates if all popover should be shown with animation or not. Default is **true**.
@@ -125,6 +127,12 @@ import {POPOVER_DIRECTIVES} from "ng2-popover";
                 [popoverCloseOnMouseOutside]="true">
             hover this button to see a popover, allows to create interactive popovers
         </button>
+    </div>
+
+    <!-- popover show on hover -->
+    <br/>
+    <div>
+        <button popover="Hello dismissible popover" [popoverDismissTimeout]="2000">click to see this popover. This popover will be dismissed in two seconds</button>
     </div>
 
 </div>
