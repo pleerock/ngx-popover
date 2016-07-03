@@ -1,6 +1,6 @@
 {
   "name": "ng2-popover",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Simple popover control for your angular2 applications using bootstrap3.",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -26,11 +26,11 @@
     "@angular/core": "^2.0.0-rc.1"
   },
   "devDependencies": {
-    "@angular/core": "^2.0.0-rc.2",
-    "@angular/common": "^2.0.0-rc.2",
-    "@angular/compiler": "^2.0.0-rc.2",
-    "@angular/platform-browser": "^2.0.0-rc.2",
-    "@angular/platform-browser-dynamic": "^2.0.0-rc.2",
+    "@angular/core": "^2.0.0-rc.4",
+    "@angular/common": "^2.0.0-rc.4",
+    "@angular/compiler": "^2.0.0-rc.4",
+    "@angular/platform-browser": "^2.0.0-rc.4",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.4",
     "bootstrap": "^3.3.6",
     "chai": "^3.4.1",
     "del": "^2.2.0",

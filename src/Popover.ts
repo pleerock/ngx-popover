@@ -48,6 +48,9 @@ export class Popover implements OnChanges {
     @Input()
     popoverCloseOnMouseOutside: boolean = false;
 
+    @Input()
+    popoverDismissTimeout: number = 0;
+
     // -------------------------------------------------------------------------
     // Public Methods
     // -------------------------------------------------------------------------
@@ -120,6 +123,9 @@ export class Popover implements OnChanges {
                     popover.closeOnMouseOutside = this.popoverCloseOnMouseOutside;
                 
                 popover.onCloseFromOutside.subscribe(() => this.hide());
+                // if dismissTimeout option is set, then this popover will be dismissed in dismissTimeout time
+                if (this.popoverDismissTimeout > 0)
+                    setTimeout(() => this.hide(), this.popoverDismissTimeout);
             });
         } else {
             const popover = this.content as PopoverContent;
@@ -136,6 +142,9 @@ export class Popover implements OnChanges {
                 popover.closeOnMouseOutside = this.popoverCloseOnMouseOutside;
 
             popover.onCloseFromOutside.subscribe(() => this.hide());
+            // if dismissTimeout option is set, then this popover will be dismissed in dismissTimeout time
+            if (this.popoverDismissTimeout > 0)
+                setTimeout(() => this.hide(), this.popoverDismissTimeout);
             popover.show();
         }
     }

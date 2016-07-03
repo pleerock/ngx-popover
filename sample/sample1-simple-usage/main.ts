@@ -51,6 +51,12 @@ import {POPOVER_DIRECTIVES} from "../../src/index";
         </button>
     </div>
     
+    <!-- popover show on hover -->
+    <br/>
+    <div>
+        <button popover="Hello dismissible popover" [popoverDismissTimeout]="2000">click to see this popover. This popover will be dismissed in two seconds</button>
+    </div>
+    
 </div>
 `,
     directives: [POPOVER_DIRECTIVES]
