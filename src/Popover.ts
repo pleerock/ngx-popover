@@ -1,10 +1,10 @@
-import {Directive, HostListener, ComponentRef, ViewContainerRef, ComponentResolver, ComponentFactory, Input} from "@angular/core";
+import { Directive, HostListener, ComponentRef, ViewContainerRef, ComponentResolver, ComponentFactory, Input, OnChanges, SimpleChange } from "@angular/core";
 import {PopoverContent} from "./PopoverContent";
 
 @Directive({
     selector: "[popover]"
 })
-export class Popover {
+export class Popover implements OnChanges {
 
     // -------------------------------------------------------------------------
     // Properties
@@ -83,6 +83,14 @@ export class Popover {
         if (!this.visible) return;
 
         this.hide();
+    }
+
+    ngOnChanges(changes: {[propertyName: string]: SimpleChange}) {
+        if(changes['popoverDisabled']){
+            if(changes['popoverDisabled'].currentValue){
+                this.hide();
+            }
+        }
     }
 
     // -------------------------------------------------------------------------
