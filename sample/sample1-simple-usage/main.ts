@@ -25,10 +25,12 @@ import {POPOVER_DIRECTIVES} from "../../src/index";
     <div>
         <popover-content #myPopover 
             title="this header can be omitted"
+            placement="right"
             [closeOnClickOutside]="true">
             <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span> 
             <b><i><span style="color: #ffc520">Popover With</span></i></b> <small>Html support</small>.
             Click outside of this popover and it will be dismissed automatically.
+            <u (click)="myPopover.hide()">Or click here to close it</u>.
         </popover-content>
         
         <button [popover]="myPopover">click this button to see a popover</button>
@@ -54,7 +56,8 @@ import {POPOVER_DIRECTIVES} from "../../src/index";
     <!-- popover show on hover -->
     <br/>
     <div>
-        <button popover="Hello dismissible popover" [popoverDismissTimeout]="2000">click to see this popover. This popover will be dismissed in two seconds</button>
+        <button popover="Hello dismissible popover" 
+                [popoverDismissTimeout]="2000">click to see this popover. This popover will be dismissed in two seconds</button>
     </div>
     
 </div>

@@ -1,4 +1,5 @@
 import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef, OnDestroy, ViewChild, EventEmitter} from "@angular/core";
+import {Popover} from "./Popover";
 
 @Component({
     selector: "popover-content",
@@ -45,8 +46,8 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     // Inputs / Outputs 
     // -------------------------------------------------------------------------
 
-    @Input()
-    hostElement: HTMLElement;
+    // @Input()
+    // hostElement: HTMLElement;
 
     @Input()
     content: string;
@@ -73,6 +74,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     @ViewChild("popoverDiv")
     popoverDiv: ElementRef;
 
+    popover: Popover;
     onCloseFromOutside = new EventEmitter();
     top: number = -1000;
     left: number = -1000;
@@ -88,8 +90,8 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
      */
     onDocumentMouseDown = (event: any) => {
         const element = this.element.nativeElement;
-        if (!element || !this.hostElement) return;
-        if (element.contains(event.target) || this.hostElement.contains(event.target)) return;
+        if (!element || !this.popover) return;
+        if (element.contains(event.target) || this.popover.getElement().contains(event.target)) return;
         this.hide();
         this.onCloseFromOutside.emit(undefined);
     };
@@ -128,10 +130,10 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     // -------------------------------------------------------------------------
     
     show(): void {
-        if (!this.hostElement)
+        if (!this.popover || !this.popover.getElement())
             return;
 
-        const p = this.positionElements(this.hostElement, this.popoverDiv.nativeElement, this.placement);
+        const p = this.positionElements(this.popover.getElement(), this.popoverDiv.nativeElement, this.placement);
         this.displayType = "block";
         this.top = p.top;
         this.left = p.left;
@@ -139,6 +141,13 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     }
 
     hide(): void {
+        this.top = -1000;
+        this.left = -1000;
+        this.isIn = true;
+        this.popover.hide();
+    }
+
+    hideFromPopover() {
         this.top = -1000;
         this.left = -1000;
         this.isIn = true;

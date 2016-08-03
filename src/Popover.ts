@@ -2,7 +2,8 @@ import { Directive, HostListener, ComponentRef, ViewContainerRef, ComponentResol
 import {PopoverContent} from "./PopoverContent";
 
 @Directive({
-    selector: "[popover]"
+    selector: "[popover]",
+    exportAs: "popover"
 })
 export class Popover implements OnChanges {
 
@@ -17,7 +18,8 @@ export class Popover implements OnChanges {
     // Constructor
     // -------------------------------------------------------------------------
 
-    constructor(private viewContainerRef: ViewContainerRef, private resolver: ComponentResolver) {
+    constructor(private viewContainerRef: ViewContainerRef,
+                private resolver: ComponentResolver) {
     }
 
     // -------------------------------------------------------------------------
@@ -31,10 +33,10 @@ export class Popover implements OnChanges {
     popoverDisabled: boolean;
 
     @Input()
-    popoverAnimation: boolean = true;
+    popoverAnimation: boolean;
 
     @Input()
-    popoverPlacement: "top"|"bottom"|"left"|"right" = "bottom";
+    popoverPlacement: "top"|"bottom"|"left"|"right";
     
     @Input()
     popoverTitle: string;
@@ -43,28 +45,23 @@ export class Popover implements OnChanges {
     popoverOnHover: boolean = false;
 
     @Input()
-    popoverCloseOnClickOutside: boolean = false;
+    popoverCloseOnClickOutside: boolean;
 
     @Input()
-    popoverCloseOnMouseOutside: boolean = false;
+    popoverCloseOnMouseOutside: boolean;
 
     @Input()
     popoverDismissTimeout: number = 0;
 
     // -------------------------------------------------------------------------
-    // Public Methods
+    // Event listeners
     // -------------------------------------------------------------------------
 
     @HostListener("click")
     showOrHideOnClick(): void {
         if (this.popoverOnHover) return;
         if (this.popoverDisabled) return;
-
-        if (!this.visible) {
-            this.show();
-        } else {
-            this.hide();
-        }
+        this.toggle();
     }
 
     @HostListener("focusin")
@@ -72,8 +69,6 @@ export class Popover implements OnChanges {
     showOnHover(): void {
         if (!this.popoverOnHover) return;
         if (this.popoverDisabled) return;
-        if (this.visible) return;
-        
         this.show();
     }
 
@@ -83,8 +78,6 @@ export class Popover implements OnChanges {
         if (this.popoverCloseOnMouseOutside) return; // don't do anything since not we control this
         if (!this.popoverOnHover) return;
         if (this.popoverDisabled) return;
-        if (!this.visible) return;
-
         this.hide();
     }
 
@@ -97,10 +90,20 @@ export class Popover implements OnChanges {
     }
 
     // -------------------------------------------------------------------------
-    // Private Methods
+    // Public Methods
     // -------------------------------------------------------------------------
 
-    private show() {
+    toggle() {
+        if (!this.visible) {
+            this.show();
+        } else {
+            this.hide();
+        }
+    }
+
+    show() {
+        if (this.visible) return;
+
         this.visible = true;
         if (typeof this.content === "string") {
             this.resolver.resolveComponent(PopoverContent).then((factory: ComponentFactory<any>) => {
@@ -109,7 +112,7 @@ export class Popover implements OnChanges {
 
                 this.popover = this.viewContainerRef.createComponent(factory);
                 const popover = this.popover.instance as PopoverContent;
-                popover.hostElement = this.viewContainerRef.element.nativeElement;
+                popover.popover = this;
                 popover.content = this.content as string;
                 if (this.popoverPlacement !== undefined)
                     popover.placement = this.popoverPlacement;
@@ -129,7 +132,7 @@ export class Popover implements OnChanges {
             });
         } else {
             const popover = this.content as PopoverContent;
-            popover.hostElement = this.viewContainerRef.element.nativeElement;
+            popover.popover = this;
             if (this.popoverPlacement !== undefined)
                 popover.placement = this.popoverPlacement;
             if (this.popoverAnimation !== undefined)
@@ -149,13 +152,19 @@ export class Popover implements OnChanges {
         }
     }
 
-    private hide() {
+    hide() {
+        if (!this.visible) return;
+
         this.visible = false;
         if (this.popover)
             this.popover.destroy();
 
         if (this.content instanceof PopoverContent)
-            (this.content as PopoverContent).hide();
+            (this.content as PopoverContent).hideFromPopover();
+    }
+
+    getElement() {
+        return this.viewContainerRef.element.nativeElement;
     }
 
 }
