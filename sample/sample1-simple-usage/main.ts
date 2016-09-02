@@ -1,6 +1,7 @@
-import {bootstrap} from "@angular/platform-browser-dynamic";
-import {Component} from "@angular/core";
-import {POPOVER_DIRECTIVES} from "../../src/index";
+import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
+import {Component, NgModule} from "@angular/core";
+import {PopoverModule} from "../../src/index";
+import {BrowserModule} from "@angular/platform-browser";
 
 @Component({
     selector: "app",
@@ -61,11 +62,26 @@ import {POPOVER_DIRECTIVES} from "../../src/index";
     </div>
     
 </div>
-`,
-    directives: [POPOVER_DIRECTIVES]
+`
 })
 export class Sample1App {
 
 }
 
-bootstrap(Sample1App);
+@NgModule({
+    imports: [
+        BrowserModule,
+        PopoverModule
+    ],
+    declarations: [
+        Sample1App
+    ],
+    bootstrap: [
+        Sample1App
+    ]
+})
+export class Sample1Module {
+
+}
+
+platformBrowserDynamic().bootstrapModule(Sample1Module);

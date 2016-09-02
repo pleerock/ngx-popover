@@ -1,4 +1,4 @@
-import { Directive, HostListener, ComponentRef, ViewContainerRef, ComponentResolver, ComponentFactory, Input, OnChanges, SimpleChange } from "@angular/core";
+import { Directive, HostListener, ComponentRef, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, Input, OnChanges, SimpleChange } from "@angular/core";
 import {PopoverContent} from "./PopoverContent";
 
 @Directive({
@@ -19,7 +19,7 @@ export class Popover implements OnChanges {
     // -------------------------------------------------------------------------
 
     constructor(private viewContainerRef: ViewContainerRef,
-                private resolver: ComponentResolver) {
+                private resolver: ComponentFactoryResolver) {
     }
 
     // -------------------------------------------------------------------------
@@ -106,30 +106,29 @@ export class Popover implements OnChanges {
 
         this.visible = true;
         if (typeof this.content === "string") {
-            this.resolver.resolveComponent(PopoverContent).then((factory: ComponentFactory<any>) => {
-                if (!this.visible)
-                    return;
+            const factory = this.resolver.resolveComponentFactory(PopoverContent);
+            if (!this.visible)
+                return;
 
-                this.popover = this.viewContainerRef.createComponent(factory);
-                const popover = this.popover.instance as PopoverContent;
-                popover.popover = this;
-                popover.content = this.content as string;
-                if (this.popoverPlacement !== undefined)
-                    popover.placement = this.popoverPlacement;
-                if (this.popoverAnimation !== undefined)
-                    popover.animation = this.popoverAnimation;
-                if (this.popoverTitle !== undefined)
-                    popover.title = this.popoverTitle;
-                if (this.popoverCloseOnClickOutside !== undefined)
-                    popover.closeOnClickOutside = this.popoverCloseOnClickOutside;
-                if (this.popoverCloseOnMouseOutside !== undefined)
-                    popover.closeOnMouseOutside = this.popoverCloseOnMouseOutside;
-                
-                popover.onCloseFromOutside.subscribe(() => this.hide());
-                // if dismissTimeout option is set, then this popover will be dismissed in dismissTimeout time
-                if (this.popoverDismissTimeout > 0)
-                    setTimeout(() => this.hide(), this.popoverDismissTimeout);
-            });
+            this.popover = this.viewContainerRef.createComponent(factory);
+            const popover = this.popover.instance as PopoverContent;
+            popover.popover = this;
+            popover.content = this.content as string;
+            if (this.popoverPlacement !== undefined)
+                popover.placement = this.popoverPlacement;
+            if (this.popoverAnimation !== undefined)
+                popover.animation = this.popoverAnimation;
+            if (this.popoverTitle !== undefined)
+                popover.title = this.popoverTitle;
+            if (this.popoverCloseOnClickOutside !== undefined)
+                popover.closeOnClickOutside = this.popoverCloseOnClickOutside;
+            if (this.popoverCloseOnMouseOutside !== undefined)
+                popover.closeOnMouseOutside = this.popoverCloseOnMouseOutside;
+
+            popover.onCloseFromOutside.subscribe(() => this.hide());
+            // if dismissTimeout option is set, then this popover will be dismissed in dismissTimeout time
+            if (this.popoverDismissTimeout > 0)
+                setTimeout(() => this.hide(), this.popoverDismissTimeout);
         } else {
             const popover = this.content as PopoverContent;
             popover.popover = this;
