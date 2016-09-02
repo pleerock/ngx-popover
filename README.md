@@ -27,7 +27,7 @@ or create an issue if you have problems with it.
 
 ## Usage
 
-Example of simple usage:
+Import `PopoverModule` in your app and start using a component:
 
 ```html
 <div popover="content to be shown in the popover"
@@ -78,7 +78,7 @@ Example of usage with dynamic html content:
 
 ```typescript
 import {Component} from "@angular/core";
-import {POPOVER_DIRECTIVES} from "ng2-popover";
+import {PopoverModule} from "ng2-popover";
 
 @Component({
     selector: "app",
@@ -136,10 +136,25 @@ import {POPOVER_DIRECTIVES} from "ng2-popover";
     </div>
 
 </div>
-`,
-    directives: [POPOVER_DIRECTIVES]
+`
 })
 export class App {
+
+}
+
+@NgModule({
+    imports: [
+        // ...
+        PopoverModule
+    ],
+    declarations: [
+        App
+    ],
+    bootstrap: [
+        App
+    ]
+})
+export class AppModule {
 
 }
 ```
