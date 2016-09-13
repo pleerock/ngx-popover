@@ -4,6 +4,8 @@ Simple popover control for your angular2 applications using bootstrap3. Does not
 If you don't want to use it without bootstrap - simply create proper css classes. Please star a project if you liked it,
 or create an issue if you have problems with it.
 
+see [DEMO](http://plnkr.co/edit/eU5x2idKcMFzA6OAqHm6?p=preview).
+
 ![angular 2 popover](https://raw.githubusercontent.com/pleerock/ng2-popover/master/resources/popover-example.png)
 
 ## Installation
