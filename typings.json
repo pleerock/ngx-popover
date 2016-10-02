@@ -3,7 +3,7 @@
     "assertion-error": "github:DefinitelyTyped/DefinitelyTyped/assertion-error/assertion-error.d.ts#7a3ca1f0b8a0960af9fc1838f3234cc9d6ce0645",
     "chai": "github:DefinitelyTyped/DefinitelyTyped/chai/chai.d.ts#7a3ca1f0b8a0960af9fc1838f3234cc9d6ce0645",
     "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#7a3ca1f0b8a0960af9fc1838f3234cc9d6ce0645",
-    "node": "registry:dt/node#4.0.0+20160505172921",
+    "node": "registry:env/node#6.0.0+20160723033700",
     "sinon": "github:DefinitelyTyped/DefinitelyTyped/sinon/sinon.d.ts#7a3ca1f0b8a0960af9fc1838f3234cc9d6ce0645"
   },
   "globalDependencies": {
