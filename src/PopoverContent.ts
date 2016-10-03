@@ -128,7 +128,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     // -------------------------------------------------------------------------
     // Public Methods
     // -------------------------------------------------------------------------
-    
+
     show(): void {
         if (!this.popover || !this.popover.getElement())
             return;
@@ -196,21 +196,21 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
                     left: shiftWidth[pos0]()
                 };
                 break;
-            
+
             case "left":
                 targetElPos = {
                     top: shiftHeight[pos1](),
                     left: hostElPos.left - targetElWidth
                 };
                 break;
-            
+
             case "bottom":
                 targetElPos = {
                     top: shiftHeight[pos0](),
                     left: shiftWidth[pos1]()
                 };
                 break;
-            
+
             default:
                 targetElPos = {
                     top: hostElPos.top - targetElHeight,
@@ -241,7 +241,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
         };
     }
 
-    private offset(nativeEl:any): { width: number, height: number, top: number, left: number } {
+    private offset(nativeEl: any): { width: number, height: number, top: number, left: number } {
         const boundingClientRect = nativeEl.getBoundingClientRect();
         return {
             width: boundingClientRect.width || nativeEl.offsetWidth,
@@ -257,7 +257,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
 
         if (window.getComputedStyle)
             return (window.getComputedStyle as any)(nativeEl)[cssProp];
-        
+
         // finally try and get inline style
         return (nativeEl.style as any)[cssProp];
     }

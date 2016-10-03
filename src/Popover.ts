@@ -37,7 +37,7 @@ export class Popover implements OnChanges {
 
     @Input()
     popoverPlacement: "top"|"bottom"|"left"|"right";
-    
+
     @Input()
     popoverTitle: string;
 
@@ -82,8 +82,8 @@ export class Popover implements OnChanges {
     }
 
     ngOnChanges(changes: {[propertyName: string]: SimpleChange}) {
-        if(changes['popoverDisabled']){
-            if(changes['popoverDisabled'].currentValue){
+        if (changes["popoverDisabled"]) {
+            if (changes["popoverDisabled"].currentValue) {
                 this.hide();
             }
         }
