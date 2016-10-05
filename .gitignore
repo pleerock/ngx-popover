@@ -1,5 +1,6 @@
 typings/
 build/
-node_modules
-npm-debug.log
+node_modules/
+**/*.ngfactory.ts
 .vscode
+npm-debug.log
