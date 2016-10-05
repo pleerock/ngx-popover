@@ -56,7 +56,7 @@ export class Gulpfile {
     @MergedTask()
     packageCompile() {
         const tsProject = ts.createProject("tsconfig.json");
-        const tsResult = gulp.src(["./src/**/*.ts", "./typings/**/*.ts"])
+        const tsResult = gulp.src(["./src/**/*.ts","node_modules/@types/**/*.ts"])
             .pipe(sourcemaps.init())
             .pipe(ts(tsProject));
 
@@ -109,15 +109,6 @@ export class Gulpfile {
     }
 
     /**
-     * This task will copy typings.json file to the build package.
-     */
-    @Task()
-    copyTypingsFile() {
-        return gulp.src("./typings.json")
-            .pipe(gulp.dest("./build/package"));
-    }
-
-    /**
      * Creates a package that can be published to npm.
      */
     @SequenceTask()
@@ -127,7 +118,7 @@ export class Gulpfile {
             "packageCompile",
             "packageMoveCompiledFiles",
             "packageClearCompileDirectory",
-            ["packagePreparePackageFile", "packageReadmeFile", "copyTypingsFile"]
+            ["packagePreparePackageFile", "packageReadmeFile"]
         ];
     }
 
