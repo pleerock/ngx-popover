@@ -11,15 +11,16 @@ export class Popover implements OnChanges {
     // Properties
     // -------------------------------------------------------------------------
 
-    private popover: ComponentRef<PopoverContent>;
-    private visible: boolean;
+    protected PopoverComponent = PopoverContent;
+    protected popover: ComponentRef<PopoverContent>;
+    protected visible: boolean;
 
     // -------------------------------------------------------------------------
     // Constructor
     // -------------------------------------------------------------------------
 
-    constructor(private viewContainerRef: ViewContainerRef,
-                private resolver: ComponentFactoryResolver) {
+    constructor(protected viewContainerRef: ViewContainerRef,
+                protected resolver: ComponentFactoryResolver) {
     }
 
     // -------------------------------------------------------------------------
@@ -106,7 +107,7 @@ export class Popover implements OnChanges {
 
         this.visible = true;
         if (typeof this.content === "string") {
-            const factory = this.resolver.resolveComponentFactory(PopoverContent);
+            const factory = this.resolver.resolveComponentFactory(this.PopoverComponent);
             if (!this.visible)
                 return;
 

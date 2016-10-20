@@ -100,8 +100,8 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     // Constructor
     // -------------------------------------------------------------------------
 
-    constructor(private element: ElementRef,
-                private cdr: ChangeDetectorRef) {
+    constructor(protected element: ElementRef,
+                protected cdr: ChangeDetectorRef) {
     }
 
     // -------------------------------------------------------------------------
@@ -154,10 +154,10 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     }
 
     // -------------------------------------------------------------------------
-    // Private Methods
+    // Protected Methods
     // -------------------------------------------------------------------------
 
-    private positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string, appendToBody: boolean = false): { top: number, left: number } {
+    protected positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string, appendToBody: boolean = false): { top: number, left: number } {
         let positionStrParts = positionStr.split("-");
         let pos0 = positionStrParts[0];
         let pos1 = positionStrParts[1] || "center";
@@ -222,7 +222,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
         return targetElPos;
     }
 
-    private position(nativeEl: HTMLElement): { width: number, height: number, top: number, left: number } {
+    protected position(nativeEl: HTMLElement): { width: number, height: number, top: number, left: number } {
         let offsetParentBCR = { top: 0, left: 0 };
         const elBCR = this.offset(nativeEl);
         const offsetParentEl = this.parentOffsetEl(nativeEl);
@@ -241,7 +241,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
         };
     }
 
-    private offset(nativeEl: any): { width: number, height: number, top: number, left: number } {
+    protected offset(nativeEl: any): { width: number, height: number, top: number, left: number } {
         const boundingClientRect = nativeEl.getBoundingClientRect();
         return {
             width: boundingClientRect.width || nativeEl.offsetWidth,
@@ -251,7 +251,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
         };
     }
 
-    private getStyle(nativeEl: HTMLElement, cssProp: string): string {
+    protected getStyle(nativeEl: HTMLElement, cssProp: string): string {
         if ((nativeEl as any).currentStyle) // IE
             return (nativeEl as any).currentStyle[cssProp];
 
@@ -262,11 +262,11 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
         return (nativeEl.style as any)[cssProp];
     }
 
-    private isStaticPositioned(nativeEl: HTMLElement): boolean {
+    protected isStaticPositioned(nativeEl: HTMLElement): boolean {
         return (this.getStyle(nativeEl, "position") || "static" ) === "static";
     }
 
-    private parentOffsetEl(nativeEl: HTMLElement): any {
+    protected parentOffsetEl(nativeEl: HTMLElement): any {
         let offsetParent: any = nativeEl.offsetParent || window.document;
         while (offsetParent && offsetParent !== window.document && this.isStaticPositioned(offsetParent)) {
             offsetParent = offsetParent.offsetParent;
