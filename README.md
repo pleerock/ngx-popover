@@ -63,7 +63,7 @@ Example of usage with dynamic html content:
 * `<div popover>`:
     * `popover="string"` The message to be shown in the popover.
     * `popoverTitle="string"` Popover title text.
-    * `popoverPlacement="top|bottom|left|right"` Indicates where the popover should be placed. Default is **"bottom"**.
+    * `popoverPlacement="top|bottom|left|right|auto|auto top|auto bottom|auto left|auto right"` Indicates where the popover should be placed. When using **"auto"** modifier, will show in opposite direction if not enough room. Default is **"bottom"**.
     * `[popoverDisabled]="true|false"` Indicates if popover should be disabled. If popover is disabled then it will not be shown. Default is **false**
     * `[popoverAnimation]="true|false"` Indicates if all popover should be shown with animation or not. Default is **true**.
     * `[popoverOnHover]="true|false"` If set to true then popover will open on mouse over instead of mouse click. Default is **false**.
@@ -71,7 +71,7 @@ Example of usage with dynamic html content:
     * `[popoverCloseOnClickOutside]="true|false"` Indicates if popover should be closed when user click outside of it. Default is **false**.
     * `[popoverDismissTimeout]="number"` Used to automatically dismiss popover after given amount of time. Default is **0**, means disabled.
 * `<popover-content>`:
-    * `placement="top|bottom|left|right"` Indicates where the popover should be placed. Default is **"bottom"**.
+    * `placement="top|bottom|left|right|auto|auto top|auto bottom|auto left|auto right"` Indicates where the popover should be placed. When using **"auto"** modifier, will show in opposite direction if not enough room. Default is **"bottom"**.
     * `[animation]="true|false"` Indicates if all popover should be shown with animation or not. Default is **true**.
     * `[closeOnMouseOutside]="true|false"` Indicates if popover should be closed when user mouse outside of it. Default is **false**.
     * `[closeOnClickOutside]="true|false"` Indicates if popover should be closed when you click outside of it. Default is **false**.

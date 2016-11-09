@@ -279,14 +279,14 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     }
 
     protected getEffectivePlacement(placement: string, hostElement: HTMLElement, targetElement: HTMLElement): string {
-        const desiredPlacementParts = placement.split(" ");
-        if (desiredPlacementParts[0] !== "auto") {
+        const placementParts = placement.split(" ");
+        if (placementParts[0] !== "auto") {
             return placement;
         }
 
         const hostElBoundingRect = hostElement.getBoundingClientRect();
 
-        const desiredPlacement = desiredPlacementParts[1] || "bottom";
+        const desiredPlacement = placementParts[1] || "bottom";
 
         if (desiredPlacement === "top" && hostElBoundingRect.top - targetElement.offsetHeight < 0) {
             return "bottom";
