@@ -37,7 +37,7 @@ export class Popover implements OnChanges {
     popoverAnimation: boolean;
 
     @Input()
-    popoverPlacement: "top"|"bottom"|"left"|"right";
+    popoverPlacement: "top"|"bottom"|"left"|"right"|"auto"|"auto top"|"auto bottom"|"auto left"|"auto right";
 
     @Input()
     popoverTitle: string;

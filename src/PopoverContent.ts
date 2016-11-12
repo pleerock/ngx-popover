@@ -4,7 +4,7 @@ import {Popover} from "./Popover";
 @Component({
     selector: "popover-content",
     template: `
-<div #popoverDiv class="popover {{ placement }}"
+<div #popoverDiv class="popover {{ effectivePlacement }}"
      [style.top]="top + 'px'"
      [style.left]="left + 'px'"
      [class.in]="isIn"
@@ -53,7 +53,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     content: string;
 
     @Input()
-    placement: "top"|"bottom"|"left"|"right" = "bottom";
+    placement: "top"|"bottom"|"left"|"right"|"auto"|"auto top"|"auto bottom"|"auto left"|"auto right" = "bottom";
 
     @Input()
     title: string;
@@ -80,6 +80,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     left: number = -10000;
     isIn: boolean = false;
     displayType: string = "none";
+    effectivePlacement: string;
 
     // -------------------------------------------------------------------------
     // Anonymous 
@@ -164,6 +165,9 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
         let hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
         let targetElWidth = targetEl.offsetWidth;
         let targetElHeight = targetEl.offsetHeight;
+
+        this.effectivePlacement = pos0 = this.getEffectivePlacement(pos0, hostEl, targetEl);
+
         let shiftWidth: any = {
             center: function (): number {
                 return hostElPos.left + hostElPos.width / 2 - targetElWidth / 2;
@@ -274,4 +278,29 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
         return offsetParent || window.document;
     }
 
+    protected getEffectivePlacement(placement: string, hostElement: HTMLElement, targetElement: HTMLElement): string {
+        const placementParts = placement.split(" ");
+        if (placementParts[0] !== "auto") {
+            return placement;
+        }
+
+        const hostElBoundingRect = hostElement.getBoundingClientRect();
+
+        const desiredPlacement = placementParts[1] || "bottom";
+
+        if (desiredPlacement === "top" && hostElBoundingRect.top - targetElement.offsetHeight < 0) {
+            return "bottom";
+        }
+        if (desiredPlacement === "bottom" && hostElBoundingRect.bottom + targetElement.offsetHeight > window.innerHeight) {
+            return "top";
+        }
+        if (desiredPlacement === "left" && hostElBoundingRect.left - targetElement.offsetWidth < 0) {
+            return "right";
+        }
+        if (desiredPlacement === "right" && hostElBoundingRect.right + targetElement.offsetWidth > window.innerWidth) {
+            return "left";
+        }
+
+        return desiredPlacement;
+    }
 }

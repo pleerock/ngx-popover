@@ -28,9 +28,11 @@
   "devDependencies": {
     "@angular/common": "^2.0.0",
     "@angular/compiler": "^2.0.0",
+    "@angular/compiler-cli": "^2.0.0",
     "@angular/core": "^2.0.0",
     "@angular/platform-browser": "^2.0.0",
     "@angular/platform-browser-dynamic": "^2.0.0",
+    "@angular/platform-server": "^2.0.1",
     "@types/assertion-error": "^1.0.30",
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.32",
@@ -57,9 +59,7 @@
     "tslint": "^3.15.1",
     "tslint-stylish": "^2.1.0-beta",
     "typescript": "^2.0.3",
-    "zone.js": "^0.6.25",
-    "@angular/compiler-cli": "^0.6.3",
-    "@angular/platform-server": "^2.0.1"
+    "zone.js": "^0.6.25"
   },
   "scripts": {
     "tsc": "ngc -p ."
