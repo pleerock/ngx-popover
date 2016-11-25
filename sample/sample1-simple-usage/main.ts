@@ -61,6 +61,12 @@ import {BrowserModule} from "@angular/platform-browser";
                 [popoverDismissTimeout]="2000">click to see this popover. This popover will be dismissed in two seconds</button>
     </div>
     
+    <br/>
+    <div>
+        <button popover="By default, this popover will be shown to the left if enough space, otherwise, to the right." popoverPlacement="auto left">
+            click this button to see a popover using auto placement
+        </button>
+    </div>
 </div>
 `
 })
