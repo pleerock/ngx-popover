@@ -1,4 +1,4 @@
-import { Directive, HostListener, ComponentRef, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, Input, OnChanges, SimpleChange } from "@angular/core";
+import { Directive, HostListener, ComponentRef, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, Input, OnChanges, SimpleChange, Output, EventEmitter } from "@angular/core";
 import {PopoverContent} from "./PopoverContent";
 
 @Directive({
@@ -53,6 +53,12 @@ export class Popover implements OnChanges {
 
     @Input()
     popoverDismissTimeout: number = 0;
+
+    @Output()
+    onShown = new EventEmitter<Popover>();
+
+    @Output()
+    onHidden = new EventEmitter<Popover>();
 
     // -------------------------------------------------------------------------
     // Event listeners
@@ -150,6 +156,8 @@ export class Popover implements OnChanges {
                 setTimeout(() => this.hide(), this.popoverDismissTimeout);
             popover.show();
         }
+
+        this.onShown.emit(this);
     }
 
     hide() {
@@ -161,6 +169,8 @@ export class Popover implements OnChanges {
 
         if (this.content instanceof PopoverContent)
             (this.content as PopoverContent).hideFromPopover();
+
+        this.onHidden.emit(this);
     }
 
     getElement() {
