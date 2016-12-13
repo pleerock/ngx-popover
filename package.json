@@ -62,6 +62,6 @@
     "zone.js": "^0.6.25"
   },
   "scripts": {
-    "tsc": "ngc -p ."
+    "tsc": "ngc -p tsconfig-aot.json"
   }
 }
