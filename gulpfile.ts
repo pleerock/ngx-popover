@@ -1,4 +1,4 @@
-import {Gulpclass, Task, SequenceTask, MergedTask} from "gulpclass";
+import {Gulpclass, Task, SequenceTask} from "gulpclass";
 
 const gulp = require("gulp");
 const del = require("del");
@@ -8,8 +8,6 @@ const mocha = require("gulp-mocha");
 const chai = require("chai");
 const tslint = require("gulp-tslint");
 const stylish = require("tslint-stylish");
-const ts = require("gulp-typescript");
-const sourcemaps = require("gulp-sourcemaps");
 
 @Gulpclass()
 export class Gulpfile {
@@ -31,8 +29,10 @@ export class Gulpfile {
      */
     @Task()
     compile() {
-        return gulp.src("*.js", { read: false })
-            .pipe(shell(["npm run tsc"]));
+        return gulp.src("package.json", { read: false })
+            .pipe(shell([
+                "\"node_modules/.bin/ngc\" -p tsconfig-aot.json"
+            ]));
     }
 
     // -------------------------------------------------------------------------
@@ -44,47 +44,10 @@ export class Gulpfile {
      */
     @Task()
     npmPublish() {
-        return gulp.src("*.js", { read: false })
+        return gulp.src("package.json", { read: false })
             .pipe(shell([
                 "cd ./build/package && npm publish"
             ]));
-    }
-
-    /**
-     * Copies all sources to the package directory.
-     */
-    @MergedTask()
-    packageCompile() {
-        const tsProject = ts.createProject("tsconfig.json");
-        const tsResult = gulp.src(["./src/**/*.ts","node_modules/@types/**/*.ts"])
-            .pipe(sourcemaps.init())
-            .pipe(tsProject());
-
-        return [
-            tsResult.dts.pipe(gulp.dest("./build/package")),
-            tsResult.js
-                .pipe(sourcemaps.write(".", { sourceRoot: "", includeContent: true }))
-                .pipe(gulp.dest("./build/package"))
-        ];
-    }
-
-    /**
-     * Moves all compiled files to the final package directory.
-     */
-    @Task()
-    packageMoveCompiledFiles() {
-        return gulp.src("./build/package/src/**/*")
-            .pipe(gulp.dest("./build/package"));
-    }
-
-    /**
-     * Moves all compiled files to the final package directory.
-     */
-    @Task()
-    packageClearCompileDirectory(cb: Function) {
-        return del([
-            "./build/package/src/**"
-        ], cb);
     }
 
     /**
@@ -109,16 +72,23 @@ export class Gulpfile {
     }
 
     /**
+     * This task will copy typings.json file to the build package.
+     */
+    @Task()
+    copyTypingsFile() {
+        return gulp.src("./typings.json")
+            .pipe(gulp.dest("./build/package"));
+    }
+
+    /**
      * Creates a package that can be published to npm.
      */
     @SequenceTask()
     package() {
         return [
             "clean",
-            "packageCompile",
-            "packageMoveCompiledFiles",
-            "packageClearCompileDirectory",
-            ["packagePreparePackageFile", "packageReadmeFile"]
+            "compile",
+            ["packagePreparePackageFile", "packageReadmeFile", "copyTypingsFile"]
         ];
     }
 

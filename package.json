@@ -1,6 +1,6 @@
 {
   "name": "ng2-popover",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Simple popover control for your angular2 applications using bootstrap3.",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -26,12 +26,13 @@
     "@angular/core": "^2.0.0"
   },
   "devDependencies": {
-    "@angular/common": "^2.0.0",
-    "@angular/compiler": "^2.0.0",
-    "@angular/compiler-cli": "^2.0.0",
-    "@angular/core": "^2.0.0",
-    "@angular/platform-browser": "^2.0.0",
-    "@angular/platform-browser-dynamic": "^2.0.0",
+    "@angular/common": "^2.3.1",
+    "@angular/compiler": "^2.3.1",
+    "@angular/compiler-cli": "^2.3.1",
+    "@angular/core": "^2.3.1",
+    "@angular/forms": "^2.3.1",
+    "@angular/platform-browser": "^2.3.1",
+    "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/platform-server": "^2.0.1",
     "@types/assertion-error": "^1.0.30",
     "@types/chai": "^3.4.34",
@@ -52,14 +53,14 @@
     "gulpclass": "^0.1.1",
     "mocha": "^3.1.2",
     "reflect-metadata": "0.1.8",
-    "rxjs": "5.0.0-beta.12",
+    "rxjs": "^5.0.0-rc.4",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "systemjs": "0.19.39",
     "tslint": "^3.15.1",
     "tslint-stylish": "^2.1.0-beta",
-    "typescript": "~2.0.3",
-    "zone.js": "^0.6.25"
+    "typescript": "^2.0.10",
+    "zone.js": "^0.7.2"
   },
   "scripts": {
     "tsc": "ngc -p tsconfig-aot.json"

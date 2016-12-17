@@ -1,25 +1,26 @@
 {
-    "version": "1.8.0",
-    "compilerOptions": {
-        "outDir": "build/es5",
-        "target": "es5",
-        "lib": [
-            "es2015",
-            "dom"
-        ],
-        "module": "es2015",
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "declaration": true
-    },
-    "exclude": [
-        "build",
-        "node_modules"
-    ],
-    "angularCompilerOptions": {
-        "skipMetadataEmit" : false
-    }
+  "compilerOptions": {
+	"outDir": "build/package",
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "noEmitHelpers": false,
+    "noImplicitAny": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "stripInternal": true
+  },
+  "exclude": [
+	"build",
+    "node_modules"
+  ],
+  "files": [
+    "./src/index.ts"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "build/factories"
+  }
 }
