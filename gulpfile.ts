@@ -32,7 +32,7 @@ export class Gulpfile {
     @Task()
     compile() {
         return gulp.src("*.js", { read: false })
-            .pipe(shell(["tsc"]));
+            .pipe(shell(["npm run tsc"]));
     }
 
     // -------------------------------------------------------------------------
