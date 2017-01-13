@@ -1,4 +1,4 @@
-import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef, OnDestroy, ViewChild, EventEmitter} from "@angular/core";
+import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef, OnDestroy, ViewChild, EventEmitter, Renderer } from "@angular/core";
 import {Popover} from "./Popover";
 
 @Component({
@@ -102,18 +102,21 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
     // -------------------------------------------------------------------------
 
     constructor(protected element: ElementRef,
-                protected cdr: ChangeDetectorRef) {
+                protected cdr: ChangeDetectorRef,
+                protected renderer: Renderer) {
     }
 
     // -------------------------------------------------------------------------
     // Lifecycle callbacks
     // -------------------------------------------------------------------------
 
+    listenClickFunc: any;
+    listenMouseFunc: any;
     ngAfterViewInit(): void {
         if (this.closeOnClickOutside)
-            document.addEventListener("mousedown", this.onDocumentMouseDown);
+            this.listenClickFunc = this.renderer.listenGlobal("document", "mousedown", () => this.onDocumentMouseDown);           
         if (this.closeOnMouseOutside)
-            document.addEventListener("mouseover", this.onDocumentMouseDown);
+            this.listenMouseFunc = this.renderer.listenGlobal("document", "mouseover", () => this.onDocumentMouseDown);  
 
         this.show();
         this.cdr.detectChanges();
@@ -121,9 +124,9 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
 
     ngOnDestroy() {
         if (this.closeOnClickOutside)
-            document.removeEventListener("mousedown", this.onDocumentMouseDown);
+            this.listenClickFunc();
         if (this.closeOnMouseOutside)
-            document.removeEventListener("mouseover", this.onDocumentMouseDown);
+            this.listenMouseFunc();
     }
 
     // -------------------------------------------------------------------------
