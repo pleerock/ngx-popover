@@ -1,4 +1,4 @@
-# ng2-popover
+# ngx-popover
 
 Simple popover control for your angular2 applications using bootstrap3. Does not depend of jquery.
 If you don't want to use it without bootstrap - simply create proper css classes. Please star a project if you liked it,
@@ -6,23 +6,23 @@ or create an issue if you have problems with it.
 
 see [DEMO](http://plnkr.co/edit/tmGQ43m3OGhn8uoAYWua?p=preview).
 
-![angular 2 popover](https://raw.githubusercontent.com/pleerock/ng2-popover/master/resources/popover-example.png)
+![angular 2 popover](https://raw.githubusercontent.com/pleerock/ngx-popover/master/resources/popover-example.png)
 
 ## Installation
 
 1. Install npm module:
     
-    `npm install ng2-popover --save`
+    `npm install ngx-popover --save`
 
 2. If you are using system.js you may want to add this into `map` and `package` config:
     
     ```json
     {
         "map": {
-            "ng2-popover": "node_modules/ng2-popover"
+            "ngx-popover": "node_modules/ngx-popover"
         },
         "packages": {
-            "ng2-popover": { "main": "index.js", "defaultExtension": "js" }
+            "ngx-popover": { "main": "index.js", "defaultExtension": "js" }
         }
     }
     ```
@@ -80,7 +80,7 @@ Example of usage with dynamic html content:
 
 ```typescript
 import {Component} from "@angular/core";
-import {PopoverModule} from "ng2-popover";
+import {PopoverModule} from "ngx-popover";
 
 @Component({
     selector: "app",
@@ -161,5 +161,5 @@ export class AppModule {
 }
 ```
 
-Take a look on samples in [./sample](https://github.com/pleerock/ng2-popover/tree/master/sample) for more examples of
+Take a look on samples in [./sample](https://github.com/pleerock/ngx-popover/tree/master/sample) for more examples of
 usages.

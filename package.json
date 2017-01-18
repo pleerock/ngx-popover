@@ -1,6 +1,6 @@
 {
-  "name": "ng2-popover",
-  "version": "0.0.13",
+  "name": "ngx-popover",
+  "version": "0.0.16",
   "description": "Simple popover control for your angular2 applications using bootstrap3.",
   "license": "MIT",
   "readmeFilename": "README.md",
@@ -11,10 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pleerock/ng2-popover.git"
+    "url": "https://github.com/pleerock/ngx-popover.git"
   },
   "bugs": {
-    "url": "https://github.com/pleerock/ng2-popover/issues"
+    "url": "https://github.com/pleerock/ngx-popover/issues"
   },
   "tags": [
     "popover",
@@ -26,41 +26,39 @@
     "@angular/core": "^2.0.0"
   },
   "devDependencies": {
-    "@angular/common": "^2.3.1",
-    "@angular/compiler": "^2.3.1",
-    "@angular/compiler-cli": "^2.3.1",
-    "@angular/core": "^2.3.1",
-    "@angular/forms": "^2.3.1",
-    "@angular/platform-browser": "^2.3.1",
-    "@angular/platform-browser-dynamic": "^2.3.1",
-    "@angular/platform-server": "^2.0.1",
-    "@types/assertion-error": "^1.0.30",
-    "@types/chai": "^3.4.34",
-    "@types/mocha": "^2.2.32",
-    "@types/node": "^6.0.45",
+    "@angular/common": "^2.4.3",
+    "@angular/compiler": "^2.4.3",
+    "@angular/compiler-cli": "^2.4.3",
+    "@angular/core": "^2.4.3",
+    "@angular/forms": "^2.4.3",
+    "@angular/platform-browser": "^2.4.3",
+    "@angular/platform-browser-dynamic": "^2.4.3",
+
+    "@types/node": "^7.0.0",
     "bootstrap": "^3.3.7",
     "chai": "^3.4.1",
     "del": "^2.2.2",
-    "es6-promise": "^4.0.5",
-    "es6-shim": "^0.35.1",
+    "es6-shim": "^0.35.2",
     "gulp": "^3.9.0",
+    "gulp-file": "^0.3.0",
     "gulp-mocha": "^3.0.1",
+    "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-shell": "^0.5.1",
-    "gulp-sourcemaps": "^1.7.3",
-    "gulp-tslint": "^6.1.2",
-    "gulp-typescript": "^3.0.2",
+    "gulp-tslint": "^7.0.1",
+    "gulp-typescript": "^3.1.4",
+    "gulp-uglify": "^2.0.0",
     "gulpclass": "^0.1.1",
-    "mocha": "^3.1.2",
-    "reflect-metadata": "0.1.8",
-    "rxjs": "^5.0.0-rc.4",
-    "sinon": "^1.17.6",
+    "mocha": "^3.2.0",
+    "reflect-metadata": "0.1.9",
+    "rxjs": "^5.0.3",
+    "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
-    "systemjs": "0.19.39",
-    "tslint": "^3.15.1",
+    "systemjs": "0.19.42",
+    "tslint": "^4.3.1",
     "tslint-stylish": "^2.1.0-beta",
-    "typescript": "^2.0.10",
-    "zone.js": "^0.7.2"
+    "typescript": "^2.1.5",
+    "zone.js": "^0.7.6"
   },
   "scripts": {
     "tsc": "ngc -p tsconfig-aot.json"
